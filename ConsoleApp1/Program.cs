@@ -27,12 +27,21 @@ namespace ConsoleApp1
             citizen.Address = "Tomsk, Lenina 30";
 
             Console.WriteLine(citizen.GetInfo());
-            
+
             Person a = new Person("Bob");
             string json = JsonSerializer.Serialize(a);
             Console.WriteLine(json);
             Person restoredCitizen = JsonSerializer.Deserialize<Person>(json);
-            Console.WriteLine(restoredCitizen.GetInfo());
+            //Console.WriteLine(restoredCitizen.GetInfo());
+
+            Client clientOne = new Client("Alex", "Times", new DateTime(1991, 1, 1), "6576-989898", "Bomj");
+            IAccount debitAccOne = new AccountDebit(1.5);
+            clientOne.AddAccount(debitAccOne);
+
+            foreach(IAccount acc in clientOne.GetAccounts())
+            {
+                Console.WriteLine(acc.GetInfo());
+            }
 
             Console.Read();
         }
@@ -106,13 +115,13 @@ namespace ConsoleApp1
         }
     }
 
-    class Citizen: Person
+    class Citizen : Person
     {
         protected string _passport;
         protected string _address;
 
         public Citizen(string name, string surname, DateTime dateBirth, string passport)
-            :base(name, surname, dateBirth)
+            : base(name, surname, dateBirth)
         {
             _passport = passport;
         }
@@ -128,23 +137,113 @@ namespace ConsoleApp1
 
         public override string GetInfo()
         {
-            return " Name: " + _name 
-                + "\n Surname: " + _surname 
-                + "\n Age: " + CurrentAge 
+            return " Name: " + _name
+                + "\n Surname: " + _surname
+                + "\n Age: " + CurrentAge
                 + "\n Passport: " + Passport
                 + "\n Address: " + Address
                 + "\n-----";
         }
     }
 
-    class Client: Citizen
+    class Client : Citizen
     {
-        protected double _balance;
+        protected List<IAccount> _accounts;
 
-        public Client(string name, string surname, DateTime dateBirth, string passport, string address, double balance)
+        public Client(string name, string surname, DateTime dateBirth, string passport, string address)
            : base(name, surname, dateBirth, passport, address)
         {
-            _balance = balance;
+            _accounts = new List<IAccount>();  
+        }
+
+        public override string GetInfo()
+        {
+            return " Name: " + _name
+                + "\n Surname: " + _surname
+                + "\n Age: " + CurrentAge
+                + "\n Passport: " + Passport
+                + "\n Address: " + Address
+                + "\n-----";
+        }
+        public List<IAccount> GetAccounts() => _accounts;
+        public void AddAccount(IAccount newAccount)
+        {
+            _accounts.Add(newAccount);
+        }
+        public void RemoveAccount(Guid id)
+        {
+            _accounts.RemoveAll(x => x.GetId == id);
+        }
+
+    }
+
+    interface IAccount
+    {
+        double GetBalance();
+        string GetInfo();
+        void PutAsset(double sum);
+        void TakeAsset(double sum);
+        Guid GetId { get; }
+    }
+
+    abstract class Account: IAccount
+    {
+        protected Guid id;
+        protected double _balance;
+
+        public Account()
+        {
+            id = Guid.NewGuid();
+            _balance = 0;
+        }
+        public Account(double balance)
+        {
+            id = Guid.NewGuid();
+            this._balance = balance;
+        }
+
+        public Guid GetId => id;
+        public double GetBalance() => _balance;
+        public string GetInfo()
+        {
+            return " Number: " + id.ToString() + "\n Balance: " + _balance + "\n-----";
+        }
+        public void PutAsset(double sum)
+        {
+            if (sum >= 0)
+                _balance += sum;
+        }
+        public virtual void TakeAsset(double sum)
+        {
+            if (sum >= 0)
+                if (sum <= _balance)
+                    _balance -= sum;
+        }
+    }
+
+    class AccountDebit: Account
+    {
+        public AccountDebit(double balance): base(balance)
+        {
+            id = Guid.NewGuid();
+            if (balance >= 0)
+                this._balance = balance;
+            else
+                this._balance = 0;
+        }
+    }
+
+    class AccountCredit : Account
+    {
+        public AccountCredit(double balance) : base(balance)
+        {
+            id = Guid.NewGuid();
+            this._balance = balance;
+        }
+        public override void TakeAsset(double sum)
+        {
+            if (sum >= 0)
+                _balance -= sum;
         }
     }
 }

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="38d7a570db2243cba643bedbc2f0f218" Name="Diagram1" ShowGrid="true">
+        <EntityTypeShape EntityType="E92_Ignatyeva_IDZModel.sysdiagrams" Width="1.5" PointX="7.75" PointY="8.375" IsExpanded="false" />
+        <EntityTypeShape EntityType="E92_Ignatyeva_IDZModel.Виды_питомцев" Width="1.5" PointX="0.75" PointY="5.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="E92_Ignatyeva_IDZModel.Номера_гостиницы" Width="1.5" PointX="3" PointY="5.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="E92_Ignatyeva_IDZModel.Оплата_услуг" Width="1.5" PointX="7.5" PointY="5.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="E92_Ignatyeva_IDZModel.Питомцы" Width="1.5" PointX="3" PointY="1.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="E92_Ignatyeva_IDZModel.Пользователь" Width="1.5" PointX="0.75" PointY="9.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="E92_Ignatyeva_IDZModel.Проживание" Width="1.5" PointX="5.25" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="E92_Ignatyeva_IDZModel.Роль" Width="1.5" PointX="1.125" PointY="12.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="E92_Ignatyeva_IDZModel.Сотрудники" Width="1.5" PointX="3" PointY="9.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="E92_Ignatyeva_IDZModel.Услуга_от_сотрудника" Width="2.125" PointX="5.25" PointY="10.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="E92_Ignatyeva_IDZModel.Услуги" Width="1.5" PointX="4.25" PointY="13.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="E92_Ignatyeva_IDZModel.Хозяева" Width="1.5" PointX="0.625" PointY="1.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="E92_Ignatyeva_IDZModel.Журнал_услуг" Width="1.5" PointX="5.25" PointY="8" IsExpanded="true" />
+        <AssociationConnector Association="E92_Ignatyeva_IDZModel.FK_Номера_гостиницы_Виды_питомцев" ManuallyRouted="false" />
+        <AssociationConnector Association="E92_Ignatyeva_IDZModel.FK_Питомцы_Виды_питомцев" ManuallyRouted="false" />
+        <AssociationConnector Association="E92_Ignatyeva_IDZModel.FK_Проживание_Номера_гостиницы" ManuallyRouted="false" />
+        <AssociationConnector Association="E92_Ignatyeva_IDZModel.FK_Оплата_услуг_Проживание1" ManuallyRouted="false" />
+        <AssociationConnector Association="E92_Ignatyeva_IDZModel.FK_Питомцы_Хозяева" ManuallyRouted="false" />
+        <AssociationConnector Association="E92_Ignatyeva_IDZModel.FK_Проживание_Питомцы" ManuallyRouted="false" />
+        <AssociationConnector Association="E92_Ignatyeva_IDZModel.FK_Пользователь_Роль" ManuallyRouted="false" />
+        <AssociationConnector Association="E92_Ignatyeva_IDZModel.FK_Сотрудники_Пользователь" ManuallyRouted="false" />
+        <AssociationConnector Association="E92_Ignatyeva_IDZModel.FK_Журнал_услуг_Проживание" ManuallyRouted="false" />
+        <AssociationConnector Association="E92_Ignatyeva_IDZModel.FK_Услуга_от_сотрудника_Сотрудники" ManuallyRouted="false" />
+        <AssociationConnector Association="E92_Ignatyeva_IDZModel.FK_Журнал_услуг_Услуга_от_сотрудника" ManuallyRouted="false" />
+        <AssociationConnector Association="E92_Ignatyeva_IDZModel.FK_Услуга_от_сотрудника_Услуги" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
